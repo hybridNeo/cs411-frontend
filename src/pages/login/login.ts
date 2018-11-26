@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { User } from '../../providers';
 import { MainPage } from '../';
@@ -25,6 +26,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
+    private storage: Storage,
     public translateService: TranslateService) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -34,10 +36,29 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+    console.log('here');
+
+    this.user.login(this.account).subscribe((resp : any ) => {
+      console.log(resp);
+
+      if(resp.success == true) {
+        this.navCtrl.push(MainPage);
+
+        this.storage.set('response', resp);
+        this.storage.get('response').then((val) => {
+          console.log(val);
+        });
+      } else {
+        let toast = this.toastCtrl.create({
+          message: this.loginErrorString,
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }
+
     }, (err) => {
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push(MainPage);
       // Unable to log in
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,

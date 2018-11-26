@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { Items } from '../../providers';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -13,16 +15,20 @@ export class ItemCreatePage {
 
   isReadyToSave: boolean;
 
-  item: any;
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  constructor(      private storage: Storage,
+public itemsq: Items, public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera,
+
+) {
     this.form = formBuilder.group({
       profilePic: [''],
       name: ['', Validators.required],
-      about: ['']
+      about: [''],
+      category: [''],
     });
+
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -77,7 +83,33 @@ export class ItemCreatePage {
    * back to the presenter.
    */
   done() {
-    if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
+    if (!this.form.valid) {
+      return; }
+    let info = {
+      inner : {
+        user_id: 1,
+        title: 'test',
+        content: 'content'
+      },
+        category: 'general'
+    };
+    this.storage.get('response').then((val) => {
+      console.log(val);
+      info.inner.user_id = val.user.user_id;
+      info.inner.title = this.form.value.name;
+      info.inner.content = this.form.value.about;
+      info.category = this.form.value.category;
+      this.itemsq.add(info).subscribe((res: any) => {
+        // If the API returned a successful response, mark the user as logged in
+        if (res.status == 'success') {
+          this.viewCtrl.dismiss(this.form.value);
+
+        }
+      }, err => {
+        console.error('ERROR', err);
+      });
+      this.viewCtrl.dismiss(this.form.value);
+    });
+
   }
 }

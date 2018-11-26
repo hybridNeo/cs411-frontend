@@ -29,12 +29,13 @@ export class User {
 
   constructor(public api: Api) { }
 
+
   /**
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
   login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+    let seq = this.api.post('auth', accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
@@ -54,7 +55,8 @@ export class User {
    * the user entered on the form.
    */
   signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
+    console.log(accountInfo);
+    let seq = this.api.post('users', accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
@@ -65,6 +67,16 @@ export class User {
       console.error('ERROR', err);
     });
 
+    return seq;
+  }
+
+  getUser(user_id: string) {
+    let seq = this.api.get('users/'+ user_id).share();
+    seq.subscribe((res: any) => {
+      console.log(res);
+    }, err => {
+
+    });
     return seq;
   }
 
@@ -79,6 +91,7 @@ export class User {
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    this._user = resp.user;
+    console.log(resp);
+    this._user = resp.token;
   }
 }

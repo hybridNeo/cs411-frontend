@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { User } from '../../providers';
+import { Storage } from '@ionic/storage';
+
 import { Settings } from '../../providers';
 
 /**
@@ -31,14 +34,32 @@ export class SettingsPage {
   page: string = 'main';
   pageTitleKey: string = 'SETTINGS_TITLE';
   pageTitle: string;
+  public username: string;
+  public bio: string;
 
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
     public settings: Settings,
     public formBuilder: FormBuilder,
+    private storage: Storage,
+    public user: User,
     public navParams: NavParams,
     public translate: TranslateService) {
+      console.log('here');
+      this.storage.get('response').then((val  : any) => {
+        console.log(val);
+        this.username = val.user.username;
+        //this.user = val.user;
+
+        console.log(this.user);
+        this.user.getUser(val.user.user_id).subscribe((resp : any) => {
+          this.bio = resp.bio;
+        });
+      });
+
+      // username = this.user.username;
+      // console.log(username);
   }
 
   _buildForm() {

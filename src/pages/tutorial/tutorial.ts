@@ -32,18 +32,18 @@ export class TutorialPage {
         console.log('Loaded values', values);
         this.slides = [
           {
-            title: values.TUTORIAL_SLIDE1_TITLE,
-            description: values.TUTORIAL_SLIDE1_DESCRIPTION,
-            image: 'assets/img/ica-slidebox-img-1.png',
+            title: "Welcome to PeerLearn",
+            description: "PeerLearn is a peer to peer learning platform made by students for students.",
+            image: 'https://pjp-eu.coe.int/documents/9209485/9389177/Learn+shutterstock.jpg/c41f5581-2c03-84db-ca3e-66b6b016552c',
           },
           {
-            title: values.TUTORIAL_SLIDE2_TITLE,
-            description: values.TUTORIAL_SLIDE2_DESCRIPTION,
+            title: "Create Content",
+            description: "Easy to create tutorials and quizzes",
             image: 'assets/img/ica-slidebox-img-2.png',
           },
           {
-            title: values.TUTORIAL_SLIDE3_TITLE,
-            description: values.TUTORIAL_SLIDE3_DESCRIPTION,
+            title: "Learn on the go",
+            description: "Learning has never been like this before",
             image: 'assets/img/ica-slidebox-img-3.png',
           }
         ];

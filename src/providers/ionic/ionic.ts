@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class IonicProvider {
-  apiUrl = 'http://10.195.180.180:5000';
+  apiUrl = 'http://learnfrompeers2.web.illinois.edu';
   constructor(public http: HttpClient) {
     console.log('Hello IonicProvider Provider');
   }
