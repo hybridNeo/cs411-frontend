@@ -59,7 +59,8 @@ export class Posts {
   }
 
   like(post: Post) {
-    // return this.api.post('')
+    console.log("Liking ", post)
+    return this.api.post('post-user-likes', post.post_id)
   }
 
   delete(post: Post) {

@@ -25,24 +25,18 @@
       </p>
     </ion-card-content>
     <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
+      <ion-col text-left>
+        <button ion-button clear small color="danger" icon-start (click)="likePost(post)">
           <ion-icon name='heart'></ion-icon>
-          Favorite
+          Like
         </button>
       </ion-col>
-      <ion-col text-center>
+      <ion-col text-right>
         <button ion-button clear small color="danger" icon-start (click)="openPost(post)">
           <ion-icon name='book'></ion-icon>
           Read
         </button>
       </ion-col>
-      <ion-col>
-         <button ion-button clear small color="danger" icon-start>
-           <ion-icon name='heart'></ion-icon>
-           Like
-         </button>
-       </ion-col>
     </ion-row>
   </ion-card>
   <!--<button ion-item (click)="openPost(post)">-->

@@ -57,5 +57,13 @@ export class ListPostPage {
     this.navCtrl.push('PostDetailPage', {
       post: post
     });
-  };
+    };
+    /**
+    * Navigate to the detail page for this post.
+    */
+   likePost(post: Post) {
+     console.log("likePost: ", post);
+     this.posts.like(post)
+     this.updatePosts()
+     };
 }
