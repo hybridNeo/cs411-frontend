@@ -18,7 +18,7 @@ export class Items {
 
   constructor(public api: Api) {
     let items = [];
-    // let items = [
+    // let posts = [
     //   {
     //     "name": "Burt Bear",
     //     "profilePic": "assets/img/speakers/bear.jpg",

@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class IonicProvider {
-  apiUrl = 'http://learnfrompeers2.web.illinois.edu';
+  apiUrl = 'http://localhost:5000';
   constructor(public http: HttpClient) {
     console.log('Hello IonicProvider Provider');
   }
@@ -32,5 +32,13 @@ export class IonicProvider {
         });
     });
   }
-
+  getTopics() {
+    return new Promise(resolve => {
+      this.http.get(this.apiUrl+'/topics').subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
 }

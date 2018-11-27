@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Posts</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createPost()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let post of posts.posts">
+    <img [src]="post.profilePicture"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{post.title}}
+      </ion-card-title>
+      <p>
+        {{post.description}}
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='heart'></ion-icon>
+          Favorite
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-start (click)="openPost(post)">
+          <ion-icon name='book'></ion-icon>
+          Read
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <!--<button ion-item (click)="openPost(post)">-->
+  <!--<ion-avatar item-start>-->
+  <!--<img [src]="post.profilePicture" />-->
+  <!--</ion-avatar>-->
+  <!--<h2>{{post.title}}</h2>-->
+  <!--<p>{{post.description}}</p>-->
+  <!--&lt;!&ndash;<ion-note item-end *ngIf="post.note">{{post.note}}</ion-note>&ndash;&gt;-->
+  <!--</button>-->
+
+  <!--<ion-item-options>-->
+  <!--<button ion-button color="danger" (click)="deletePost(post)">-->
+  <!--{{ 'DELETE_BUTTON' | translate }}-->
+  <!--</button>-->
+  <!--</ion-item-options>-->
+
+</ion-content>

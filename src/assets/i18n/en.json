@@ -54,8 +54,9 @@
   "ITEM_CREATE_TITLE": "New Item",
   "ITEM_CREATE_CHOOSE_IMAGE": "Add Image",
 
-  "ITEM_NAME_PLACEHOLDER": "Name",
-  "ITEM_ABOUT_PLACEHOLDER": "About",
+  "POST_TITLE_PLACEHOLDER": "Title",
+  "POST_DESCRIPTION_PLACEHOLDER": "Description",
+  "POST_CONTENT_PLACEHOLDER": "Ipsum Lorem",
 
   "DONE_BUTTON": "Done",
   "CANCEL_BUTTON": "Cancel",
