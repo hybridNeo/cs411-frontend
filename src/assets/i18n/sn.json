@@ -56,7 +56,8 @@
 
   "ITEM_NAME_PLACEHOLDER": "Zita",
   "ITEM_ABOUT_PLACEHOLDER": "Nezve",
-
+  "POST_TITLE_PLACEHOLDER": "Title",
+  "POST_DESCRIPTION_PLACEHOLDER": "Description",
   "DONE_BUTTON": "aita",
   "CANCEL_BUTTON": "kanzura",
   "DELETE_BUTTON": "Dzima",

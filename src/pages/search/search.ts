@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Item } from '../../models/item';
-import { Items } from '../../providers';
+import { Post } from '../../models/post';
+import { Posts } from '../../providers';
 
 @IonicPage()
 @Component({
@@ -11,30 +11,33 @@ import { Items } from '../../providers';
 })
 export class SearchPage {
 
-  currentItems: any = [];
+  currentPosts: Post[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
-
-  /**
-   * Perform a service for the proper items.
-   */
-  getItems(ev) {
-    let val = ev.target.value;
-    if (!val || !val.trim()) {
-      this.currentItems = [];
-      return;
-    }
-    this.currentItems = this.items.query({
-      name: val
-    });
+  constructor(public navCtrl: NavController, public navParams: NavParams, public posts: Posts) {
+    this.currentPosts = []
   }
 
   /**
-   * Navigate to the detail page for this item.
+   * Perform a service for the proper posts.
    */
-  openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
-      item: item
+  getPosts(ev) {
+    let val = ev.target.value;
+    if (!val || !val.trim()) {
+      this.currentPosts = [];
+      return;
+    }
+    this.currentPosts = this.posts.query({
+      title: val
+    });
+    return;
+  }
+
+  /**
+   * Navigate to the detail page for this post.
+   */
+  openPost(post: Post) {
+    this.navCtrl.push('PostDetailPage', {
+      post: post
     });
   }
 

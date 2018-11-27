@@ -14,13 +14,27 @@
 
 
 <ion-content>
-  <ion-list inset>
+  <ion-list>
     <ion-item *ngFor="let user of users">
       <ion-avatar item-start>
-        <img src="https://picsum.photos/200/300/" />
+        <img src="https://picsum.photos/200/300/"/>
       </ion-avatar>
-      <h2>{{user.username}}</h2>
+      <h1>{{user.username}}</h1>
       <p>{{user.bio}}</p>
+      <ion-row>
+        <ion-col>
+          <button ion-button clear color="danger" icon-start>
+            <ion-icon name='person-add'></ion-icon>
+            View Profile
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button clear color="danger" icon-start>
+            <ion-icon name='eye'></ion-icon>
+            Follow
+          </button>
+        </ion-col>
+      </ion-row>
     </ion-item>
   </ion-list>
 </ion-content>

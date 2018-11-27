@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { IonicProvider } from '../../providers/ionic/ionic';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicProvider} from '../../providers/ionic/ionic';
 
 /**
  * Generated class for the ListUserPage page.
@@ -16,20 +16,20 @@ import { IonicProvider } from '../../providers/ionic/ionic';
 })
 export class ListUserPage {
   users: any;
+
   getUsers() {
-      this.restProvider.getUsers()
+    this.restProvider.getUsers()
       .then(data => {
         this.users = data;
         console.log(this.users);
       });
-    }
+  }
+
   constructor(public navCtrl: NavController, public restProvider: IonicProvider, public navParams: NavParams) {
 
     this.getUsers();
 
   }
-
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListUserPage');
