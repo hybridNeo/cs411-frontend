@@ -9,3 +9,5 @@ export const MainPage = 'TabsPage';
 export const Tab1Root = 'ListPostPage';
 export const Tab2Root = 'SearchPage';
 export const Tab3Root = 'SettingsPage';
+export const Tab4Root = 'ListUsersPage';
+export const Tab5Root = 'ListTopicPage';
