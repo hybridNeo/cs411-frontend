@@ -26,7 +26,7 @@
   "TUTORIAL_SLIDE3_TITLE": "Getting Started",
   "TUTORIAL_SLIDE3_DESCRIPTION": "Need help? Check out the Super Starter README for a full tutorial",
 
-  "TUTORIAL_SLIDE4_TITLE": "Ready to Play?",
+  "TUTORIAL_SLIDE4_TITLE": "Ready to Learn?",
 
   "WELCOME_INTRO": "The starting point for your next great Ionic app",
 
@@ -56,7 +56,10 @@
 
   "POST_TITLE_PLACEHOLDER": "Title",
   "POST_DESCRIPTION_PLACEHOLDER": "Description",
-  "POST_CONTENT_PLACEHOLDER": "Ipsum Lorem",
+  "POST_CONTENT_PLACEHOLDER": "Content",
+
+  "TOPIC_TOPIC_PLACEHOLDER": "Topic",
+  "TOPIC_DESCRIPTION_PLACEHOLDER": "Description",
 
   "DONE_BUTTON": "Done",
   "CANCEL_BUTTON": "Cancel",
@@ -65,5 +68,8 @@
   "CARDS_TITLE": "Social",
 
   "SEARCH_TITLE": "Search",
-  "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\""
+  "SEARCH_POSTS_PLACEHOLDER": "Search posts, e.g. \"Free kick\"",
+  "SEARCH_USERS_PLACEHOLDER": "Search users, e.g. \"Jose Mourinho\"",
+  "SEARCH_TOPICS_PLACEHOLDER": "Search topics, e.g. \"Football\""
+
 }

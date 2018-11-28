@@ -8,7 +8,7 @@
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="getPosts($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-searchbar (ionInput)="getPosts($event)" placeholder="{{ 'SEARCH_POSTS_PLACEHOLDER' | translate }}"></ion-searchbar>
   <ion-list>
     <button ion-item (click)="openPost(post)" *ngFor="let post of currentPosts">
       <ion-avatar item-start>
@@ -18,4 +18,24 @@
       <p>{{post.description}}</p>
     </button>
   </ion-list>
+  <ion-searchbar (ionInput)="getUsers($event)" placeholder="{{ 'SEARCH_USERS_PLACEHOLDER' | translate }}"></ion-searchbar>
+   <ion-list>
+     <button ion-item (click)="openBio(user)" *ngFor="let user of currentUsers">
+       <ion-avatar item-start>
+         <img [src]="user.profilePicture" />
+       </ion-avatar>
+       <h2>{{user.username}}</h2>
+       <p>{{user.description}}</p>
+     </button>
+   </ion-list>
+   <ion-searchbar (ionInput)="getTopics($event)" placeholder="{{ 'SEARCH_TOPICS_PLACEHOLDER' | translate }}"></ion-searchbar>
+    <ion-list>
+      <button ion-item (click)="openTopic(topic)" *ngFor="let topic of currentTopics">
+        <ion-avatar item-start>
+          <img [src]="topic.profilePicture" />
+        </ion-avatar>
+        <h2>{{topic.topic}}</h2>
+        <p>{{topic.description}}</p>
+      </button>
+    </ion-list>
 </ion-content>
