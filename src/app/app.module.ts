@@ -10,7 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { Items } from '../mocks/providers/items';
-import {Settings, User, Api, Posts} from '../providers';
+import {Settings, User, Api, Posts, Users, Topics} from '../providers';
 import { MyApp } from './app.component';
 import { IonicProvider } from '../providers/ionic/ionic';
 
@@ -67,7 +67,9 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     IonicProvider,
-    Posts
+    Posts,
+    Topics,
+    Users
   ]
 })
 export class AppModule { }

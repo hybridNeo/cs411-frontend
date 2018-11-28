@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ topic.topic }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="page-profile" text-center #profilePic [style.background-image]="'url(' + topic.profilePicture + ')'">
+  </div>
+
+  <div class="page-detail" padding>
+    <h2>{{topic.topic}}</h2>
+    <p>{{topic.description}}</p>
+  </div>
+</ion-content>

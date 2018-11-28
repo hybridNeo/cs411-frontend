@@ -1,0 +1,61 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Topics</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createTopic()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let topic of topics.topics">
+    <img [src]="topic.profilePicture"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{topic.topic}}
+      </ion-card-title>
+      <p>
+        {{topic.description}}
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col text-left>
+        <button ion-button clear small color="danger" icon-start (click)="likeTopic(topic)">
+          <ion-icon name='thumbs-up'></ion-icon>
+          Like
+        </button>
+         <button ion-button clear small color="danger" icon-start (click)="unlikeTopic(topic)">
+           <ion-icon name='thumbs-down'></ion-icon>
+           UnLike
+         </button>
+       </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start (click)="openTopic(topic)">
+          <ion-icon name='book'></ion-icon>
+          Read
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <!--<button ion-item (click)="openPost(post)">-->
+  <!--<ion-avatar item-start>-->
+  <!--<img [src]="post.profilePicture" />-->
+  <!--</ion-avatar>-->
+  <!--<h2>{{post.title}}</h2>-->
+  <!--<p>{{post.description}}</p>-->
+  <!--&lt;!&ndash;<ion-note item-end *ngIf="post.note">{{post.note}}</ion-note>&ndash;&gt;-->
+  <!--</button>-->
+
+  <!--<ion-item-options>-->
+  <!--<button ion-button color="danger" (click)="deletePost(post)">-->
+  <!--{{ 'DELETE_BUTTON' | translate }}-->
+  <!--</button>-->
+  <!--</ion-item-options>-->
+
+</ion-content>
