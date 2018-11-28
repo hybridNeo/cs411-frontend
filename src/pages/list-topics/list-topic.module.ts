@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { ListTopicPage } from './list-topics';
+import { ListTopicPage } from './list-topic';
 
 @NgModule({
   declarations: [

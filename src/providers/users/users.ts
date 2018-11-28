@@ -49,7 +49,7 @@ import {Injectable} from '@angular/core';
        if (res.success == true) {
          console.log("POST user success: Adding ", res);
          var u = res.user;
-         this.users.push(new User(u.user_id, p.username));
+         this.users.push(new User(u.user_id, u.username));
        }
      }, (err) => {
        console.error('ERROR', err);

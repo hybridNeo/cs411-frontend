@@ -91,10 +91,9 @@ export class TopicCreatePage {
         user_id: val.user.user_id,
         topic: this.form.value.title,
         description: this.form.value.description,
-        content: this.form.value.content
       };
 
-      this.postsq.post(info).subscribe((res: any) => {
+      this.topicsq.post(info).subscribe((res: any) => {
         if (res.success == true) {
           console.log("Success: ", res);
         } else {
