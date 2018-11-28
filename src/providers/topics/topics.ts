@@ -27,7 +27,7 @@ import {Observable} from "rxjs";
        return this.topics;
      }
 
-     return this.topics.filter((topics) => {
+     return this.topics.filter((topic) => {
        console.log(topic);
        for (let key in params) {
          let field = topic[key];

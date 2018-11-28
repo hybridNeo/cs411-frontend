@@ -44,7 +44,7 @@ export class ListUsersPage {
    /**
     * Navigate to the detail page for this user.
     */
-   openUser(user: User) {
+   openBio(user: User) {
      console.log("openUser: ", user);
      this.navCtrl.push('UserDetailPage', {
        user: user
