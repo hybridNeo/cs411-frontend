@@ -27,10 +27,14 @@
     <ion-row no-padding>
       <ion-col text-left>
         <button ion-button clear small color="danger" icon-start (click)="likePost(post)">
-          <ion-icon name='heart'></ion-icon>
+          <ion-icon name='thumbs-up'></ion-icon>
           Like
         </button>
-      </ion-col>
+         <button ion-button clear small color="danger" icon-start (click)="unlikePost(post)">
+           <ion-icon name='thumbs-down'></ion-icon>
+           UnLike
+         </button>
+       </ion-col>
       <ion-col text-right>
         <button ion-button clear small color="danger" icon-start (click)="openPost(post)">
           <ion-icon name='book'></ion-icon>

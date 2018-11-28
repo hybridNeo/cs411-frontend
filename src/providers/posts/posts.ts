@@ -59,9 +59,16 @@ export class Posts {
   }
 
   like(post: Post) {
+    // TODO: add POST method for PostUserLikes (increment)
     console.log("Liking ", post)
     return this.api.post('post-user-likes', post.post_id)
   }
+
+  unlike(post: Post) {
+    // TODO: add POST method for PostUserLikes (decrement)
+    console.log("UnLiking ", post)
+    return this.api.post('post-user-likes', post.post_id)
+   }
 
   delete(post: Post) {
     this.posts.splice(this.posts.indexOf(post), 1);

@@ -58,12 +58,22 @@ export class ListPostPage {
       post: post
     });
     };
+
     /**
-    * Navigate to the detail page for this post.
+    * Like a post
     */
    likePost(post: Post) {
      console.log("likePost: ", post);
      this.posts.like(post)
      this.updatePosts()
      };
+
+     /**
+     * Unlike a post
+     */
+    unlikePost(post: Post) {
+      console.log("unlikePost: ", post);
+      this.posts.unlike(post)
+      this.updatePosts()
+      };
 }
