@@ -15,8 +15,19 @@ export class Posts {
   fetchAll() {
     return this.api.get('posts').map((res: any) => {
       return res.flatMap(function (post) {
-        console.log(post)
-        return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics)
+        // console.log(post)
+        if(post.topics.length > 0 && post.topics[0].topic == 'ml'){
+
+          return new Post(post.post_id, post.content, post.user_id, post.title,
+             post.description, post.topics, "assets/img/ml.png")
+        } else if(post.topics.length > 0 && post.topics[0].topic == 'distributed systems'){
+
+          return new Post(post.post_id, post.content, post.user_id, post.title,
+             post.description, post.topics, "assets/img/ds.png")
+        }
+
+        return new Post(post.post_id, post.content, post.user_id, post.title,
+          post.description, post.topics)
       })
     }).map((res) => {
       this.posts = res;
