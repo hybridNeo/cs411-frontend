@@ -73,7 +73,7 @@ export class Users {
           console.log(val);
           var my_user_id = val.user.user_id;
           console.log("UnFollowing ", val.user)
-          return this.api.post('follows', user.user_id, my_user_id)
+          return this.api.delete('follows', user.user_id, my_user_id)
       });
     }
 

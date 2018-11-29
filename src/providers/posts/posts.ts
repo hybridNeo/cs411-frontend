@@ -75,7 +75,7 @@ export class Posts {
          console.log(val);
          var user_id = val.user.user_id;
          console.log("UnLiking ", post)
-         return this.api.post('user-post-likes', user_id, post.post_id)
+         return this.api.delete('user-post-likes', user_id, post.post_id)
      });
   }
 
