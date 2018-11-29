@@ -24,6 +24,7 @@ export class PostCreatePage {
     this.form = formBuilder.group({
       title: ['', Validators.required],
       description: [''],
+      topic: [''],
       content: [''],
       profilePicture: ['']
     });
@@ -91,6 +92,7 @@ export class PostCreatePage {
         user_id: val.user.user_id,
         title: this.form.value.title,
         description: this.form.value.description,
+        topic: this.form.value.topic,
         content: this.form.value.content
       };
 
