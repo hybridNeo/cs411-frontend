@@ -34,9 +34,11 @@ export class SearchPage {
       this.currentPosts = [];
       return;
     }
-    this.currentPosts = this.posts.query({
+    this.posts.search({
       title: val
-    });
+    }).subscribe((result) => {
+      this.currentPosts = result;
+    })
     return;
   }
 

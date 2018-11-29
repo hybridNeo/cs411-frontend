@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Post} from '../../models/post';
+import {User} from '../../providers';
+
 import {Api} from '../api/api';
 import {Observable} from "rxjs";
 import {Storage} from '@ionic/storage';
@@ -35,6 +37,38 @@ export class Posts {
     }).catch(res => Observable.throw(res));
   }
 
+  search(params?: any) {
+
+    if (!params) {
+      return this.posts;
+    }
+    return this.api.get('search?query='+params.title).map((res: any) => {
+      console.log('here');
+
+      console.log(res);
+      return res.flatMap(function (post) {
+        console.log(post)
+        if(!post)
+          return None;
+        // if(!post.topics)
+        // if(post.topics.length > 0 && post.topics[0].topic == 'ml'){
+        //
+        //   return new Post(post.post_id, post.content, post.user_id, post.title,
+        //      post.description, post.topics, "assets/img/ml.png")
+        // } else if(post.topics.length > 0 && post.topics[0].topic == 'distributed systems'){
+        //
+        //   return new Post(post.post_id, post.content, post.user_id, post.title,
+        //      post.description, post.topics, "assets/img/ds.png")
+        // }
+
+        return new Post(post.post_id, post.content, post.user_id, post.title,
+          post.description, post.topics)
+      })
+    }).map((res) => {
+      this.posts = res;
+      return res
+    }).catch(res => Observable.throw(res));
+  }
   query(params?: any) {
     if (!params) {
       return this.posts;
@@ -73,6 +107,18 @@ export class Posts {
     return seq
   }
 
+  author(post: Post) {
+
+     return this.storage.get('response').then((val : any) => {
+        console.log(val);
+        console.log(val.user);
+        return val.user.getUser(post.user_id).subscribe((resp : any) => {
+            return resp
+         });
+      });
+
+    }
+
   like(post: Post) {
 
     return this.storage.get('response').then((val) => {
@@ -82,15 +128,6 @@ export class Posts {
         return this.api.post('user-post-likes', user_id, post.post_id)
     });
 
-  }
-
-  unlike(post: Post) {
-    return this.storage.get('response').then((val) => {
-         console.log(val);
-         var user_id = val.user.user_id;
-         console.log("UnLiking ", post)
-         return this.api.delete('user-post-likes', post.post_id)
-     });
   }
 
   delete(post: Post) {
