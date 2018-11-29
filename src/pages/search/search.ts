@@ -34,11 +34,11 @@ export class SearchPage {
       this.currentPosts = [];
       return;
     }
-    this.posts.search({
-      title: val
-    }).subscribe((result) => {
-      this.currentPosts = result;
+    this.currentPosts = this.posts.query({
+        title: val
     });
+    return;
+
   }
 
   /**
