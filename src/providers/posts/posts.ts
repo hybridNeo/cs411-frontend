@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Post} from '../../models/post';
-import {User} from '../../models/user';
+import {User} from '../../providers';
 
 import {Api} from '../api/api';
 import {Observable} from "rxjs";
@@ -66,14 +66,13 @@ export class Posts {
 
   author(post: Post) {
 
-     return this.storage.get('response').then((val) => {
+     return this.storage.get('response').then((val : any) => {
         console.log(val);
-        //var author_user = val.user.getUser(post.user_id).subscribe((resp : any) => {
-        //    return resp
-        // });
-        //console.log("Author ", author_user)
-        //return author_user
-    });
+        console.log(val.user);
+        return val.user.getUser(post.user_id).subscribe((resp : any) => {
+            return resp
+         });
+      });
 
     }
 
