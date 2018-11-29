@@ -18,14 +18,14 @@ export class Posts {
     return this.api.get('posts').map((res: any) => {
       return res.flatMap(function (post) {
         // console.log(post)
-        if(post.topics.length > 0 && post.topics[0].topic == 'ml'){
+        if (post.topics.length > 0 && post.topics[0].topic == 'ml') {
 
           return new Post(post.post_id, post.content, post.user_id, post.title,
-             post.description, post.topics, post.likedBy, "assets/img/ml.png")
-        } else if(post.topics.length > 0 && post.topics[0].topic == 'distributed systems'){
+            post.description, post.topics, post.likedBy, "assets/img/ml.png")
+        } else if (post.topics.length > 0 && post.topics[0].topic == 'distributed systems') {
 
           return new Post(post.post_id, post.content, post.user_id, post.title,
-             post.description, post.topics, post.likedBy, "assets/img/ds.png")
+            post.description, post.topics, post.likedBy, "assets/img/ds.png")
         }
 
         return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
@@ -41,7 +41,7 @@ export class Posts {
       return this.posts;
     }
 
-    return this.api.get('search?query='+params.title).map((res: any) => {
+    return this.api.get('search?query=' + params.title).map((res: any) => {
       return res.flatMap(function (post) {
         console.log(post);
         return new Post(post.post_id, post.content, post.user_id, post.title,
@@ -52,6 +52,7 @@ export class Posts {
       return res
     }).catch(res => Observable.throw(res));
   }
+
   query(params?: any) {
     if (!params) {
       return this.posts;
@@ -91,29 +92,30 @@ export class Posts {
   }
 
   author(post: Post) {
-
-     return this.storage.get('response').then((val : any) => {
-        console.log(val);
-        console.log(val.user);
-        return val.user.getUser(post.user_id).subscribe((resp : any) => {
-            return resp
-         });
+    return this.storage.get('response').then((val: any) => {
+      console.log(val);
+      console.log(val.user);
+      return val.user.getUser(post.user_id).subscribe((resp: any) => {
+        return resp
       });
+    });
 
-    }
+  }
 
   like(post: Post) {
-
     return this.storage.get('response').then((val) => {
-        console.log(val);
-        var user_id = val.user.user_id;
-        console.log("Liking ", post)
-        if (post.likedBy == true) {
-            return this.api.post('user-post-likes', user_id, post.post_id)
-        } else {
-            return this.api.delete('user-post-likes', user_id)        
-        }
-    });
+      console.log(val);
+      var user_id = val.user.user_id;
+      console.log("Liking ", post)
+      if (post.likedBy == true) {
+        var body = {
+          post_id: post.post_id
+        };
+        return this.api.post('user-post-likes/' + user_id, body).subscribe()
+      } else {
+        return this.api.delete('user-post-likes/' + user_id).subscribe()
+      }
+    })
 
   }
 

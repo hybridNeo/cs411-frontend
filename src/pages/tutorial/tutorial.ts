@@ -22,44 +22,55 @@ export class TutorialPage {
   showSkip = true;
   dir: string = 'ltr';
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform, private storage: Storage) {
-    this.storage.get('respons').then((response) => {
-      this.navCtrl.setRoot(MainPage, {}, {
-        animate: true,
-        direction: 'forward'
-      })
-    }, () => {
-      this.dir = platform.dir();
-      translate.get(["TUTORIAL_SLIDE1_TITLE",
-        "TUTORIAL_SLIDE1_DESCRIPTION",
-        "TUTORIAL_SLIDE2_TITLE",
-        "TUTORIAL_SLIDE2_DESCRIPTION",
-        "TUTORIAL_SLIDE3_TITLE",
-        "TUTORIAL_SLIDE3_DESCRIPTION",
-      ]).subscribe(
-        (values) => {
-          console.log('Loaded values', values);
-          this.slides = [
-            {
-              title: "Welcome to PeerLearn",
-              description: "PeerLearn is a peer to peer learning platform made by students for students.",
-              image: 'https://pjp-eu.coe.int/documents/9209485/9389177/Learn+shutterstock.jpg/c41f5581-2c03-84db-ca3e-66b6b016552c',
-            },
-            {
-              title: "Create Content",
-              description: "Easy to create tutorials and quizzes",
-              image: 'assets/img/ica-slidebox-img-2.png',
-            },
-            {
-              title: "Learn on the go",
-              description: "Learning has never been like this before",
-              image: 'assets/img/ica-slidebox-img-3.png',
-            }
-          ];
+  constructor(public navCtrl: NavController, public menu: MenuController, public translate: TranslateService,
+              public platform: Platform, private storage: Storage) {
+    this.storage.get('response').then((response) => {
+      if (response) {
+
+        console.log("Resp present");
+        this.navCtrl.setRoot(MainPage, {}, {
+          animate: true,
+          direction: 'forward'
         })
+      } else {
+        console.log("Resp absent");
+        this.loadTutorial()
+      }
+    }, () => {
+      this.loadTutorial()
     })
   }
 
+  loadTutorial() {
+    this.dir = this.platform.dir();
+    this.translate.get(["TUTORIAL_SLIDE1_TITLE",
+      "TUTORIAL_SLIDE1_DESCRIPTION",
+      "TUTORIAL_SLIDE2_TITLE",
+      "TUTORIAL_SLIDE2_DESCRIPTION",
+      "TUTORIAL_SLIDE3_TITLE",
+      "TUTORIAL_SLIDE3_DESCRIPTION",
+    ]).subscribe(
+      (values) => {
+        console.log('Loaded values', values);
+        this.slides = [
+          {
+            title: "Welcome to PeerLearn",
+            description: "PeerLearn is a peer to peer learning platform made by students for students.",
+            image: 'https://pjp-eu.coe.int/documents/9209485/9389177/Learn+shutterstock.jpg/c41f5581-2c03-84db-ca3e-66b6b016552c',
+          },
+          {
+            title: "Create Content",
+            description: "Easy to create tutorials and quizzes",
+            image: 'assets/img/ica-slidebox-img-2.png',
+          },
+          {
+            title: "Learn on the go",
+            description: "Learning has never been like this before",
+            image: 'assets/img/ica-slidebox-img-3.png',
+          }
+        ];
+      })
+  }
   startApp() {
     this.navCtrl.setRoot('WelcomePage', {}, {
       animate: true,

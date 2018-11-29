@@ -76,10 +76,10 @@ export class ListPostPage {
     * Like a post
     */
    likePost(post: Post) {
-    console.log("likePost: ", post);
-    post.likedBy = !post.likedBy;
-    this.posts.like(post)
-    this.updatePosts()
+      console.log("likePost: ", post);
+      post.likedBy = !post.likedBy;
+      this.posts.like(post)
+      this.updatePosts()
     };
 
 }
