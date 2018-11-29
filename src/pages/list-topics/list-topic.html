@@ -13,36 +13,21 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-card *ngFor="let topic of topics.topics">
-    <img [src]="topic.profilePicture"/>
-    <ion-card-content>
-      <ion-card-title>
-        {{topic.topic}}
-      </ion-card-title>
-      <p>
-        {{topic.description}}
-      </p>
-    </ion-card-content>
-    <ion-row no-padding>
-      <ion-col text-left>
-        <button ion-button clear small color="danger" icon-start (click)="likeTopic(topic)">
-          <ion-icon name='thumbs-up'></ion-icon>
-          Like
-        </button>
-         <button ion-button clear small color="danger" icon-start (click)="unlikeTopic(topic)">
-           <ion-icon name='thumbs-down'></ion-icon>
-           UnLike
-         </button>
-       </ion-col>
-      <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start (click)="openTopic(topic)">
-          <ion-icon name='book'></ion-icon>
-          Read
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+<ion-list inset>
+  <ion-item *ngFor="let topic of topics.topics" (click)="openTopic(topic)">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col>
+          <h1>{{ topic.topic }}</h1>
+          <p>{{ topic.description }}</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="arrow-forward" float-right></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-list>
   <!--<button ion-item (click)="openPost(post)">-->
   <!--<ion-avatar item-start>-->
   <!--<img [src]="post.profilePicture" />-->
