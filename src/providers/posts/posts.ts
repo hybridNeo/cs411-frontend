@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {Post} from '../../models/post';
 import {Api} from '../api/api';
 import {Observable} from "rxjs";
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class Posts {
   public posts: Post[];
 
-  constructor(public api: Api) {
+  constructor(public api: Api, private storage: Storage) {
     this.posts = [];
   }
 
@@ -59,16 +60,24 @@ export class Posts {
   }
 
   like(post: Post) {
-    // TODO: add POST method for PostUserLikes (increment)
-    console.log("Liking ", post)
-    return this.api.post('post-user-likes', post.post_id)
+
+    return this.storage.get('response').then((val) => {
+        console.log(val);
+        var user_id = val.user.user_id;
+        console.log("Liking ", post)
+        return this.api.post('user-post-likes', user_id, post.post_id)
+    });
+
   }
 
   unlike(post: Post) {
-    // TODO: add POST method for PostUserLikes (decrement)
-    console.log("UnLiking ", post)
-    return this.api.post('post-user-likes', post.post_id)
-   }
+    return this.storage.get('response').then((val) => {
+         console.log(val);
+         var user_id = val.user.user_id;
+         console.log("UnLiking ", post)
+         return this.api.post('user-post-likes', user_id, post.post_id)
+     });
+  }
 
   delete(post: Post) {
     this.posts.splice(this.posts.indexOf(post), 1);

@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
- import {User} from '../../models/user';
- import {Api} from '../api/api';
- import {Observable} from "rxjs";
+import {User} from '../../models/user';
+import {Api} from '../api/api';
+import {Observable} from "rxjs";
+import {Storage} from '@ionic/storage';
 
- @Injectable()
- export class Users {
-   public users: User[];
+@Injectable()
+export class Users {
+    public users: User[];
 
-   constructor(public api: Api) {
-     this.users = [];
-   }
+    constructor(public api: Api, private storage: Storage) {
+        this.users = [];
+    }
 
    fetchAll() {
      return this.api.get('users').map((res: any) => {
@@ -59,14 +60,21 @@ import {Injectable} from '@angular/core';
    }
 
    follow(user: User) {
-     console.log("Following ", user)
-     return this.api.post('follows', user.user_id)
+    return this.storage.get('response').then((val) => {
+         console.log(val);
+         var my_user_id = val.user.user_id;
+         console.log("Following ", val.user)
+         return this.api.post('follows', user.user_id, my_user_id)
+     });
    }
 
    unfollow(user: User) {
-     // TODO: add POST method for Follows (decrement)
-     console.log("UnFollowing ", user)
-     return this.api.post('follows', user.user_id)
+    return this.storage.get('response').then((val) => {
+          console.log(val);
+          var my_user_id = val.user.user_id;
+          console.log("UnFollowing ", val.user)
+          return this.api.post('follows', user.user_id, my_user_id)
+      });
     }
 
    delete(user: User) {
