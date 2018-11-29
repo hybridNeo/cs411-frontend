@@ -24,6 +24,12 @@
         {{post.description}}
       </p>
     </ion-card-content>
+    <ion-item *ngFor="let topic of post.topics">
+
+      <span><button ion-button clear small color="danger" > {{ topic.topic }} </button></span>
+    </ion-item>
+
+
     <ion-row no-padding>
       <ion-col text-left>
         <button ion-button clear small color="danger" icon-start (click)="likePost(post)">
