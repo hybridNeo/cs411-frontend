@@ -15,7 +15,7 @@ export class Users {
    fetchAll() {
      return this.api.get('users').map((res: any) => {
        return res.flatMap(function (user) {
-         return new User(user.user_id, user.username)
+         return new User(user.user_id, user.username, user.likedBy)
        })
      }).map((res) => {
        this.users = res;
@@ -50,7 +50,7 @@ export class Users {
        if (res.success == true) {
          console.log("POST user success: Adding ", res);
          var u = res.user;
-         this.users.push(new User(u.user_id, u.username));
+         this.users.push(new User(u.user_id, u.username, u.likedBy));
        }
      }, (err) => {
        console.error('ERROR', err);
@@ -64,7 +64,11 @@ export class Users {
          console.log(val);
          var my_user_id = val.user.user_id;
          console.log("Following ", val.user)
-         return this.api.post('follows', user.user_id, my_user_id)
+         if (user.likedBy == true) {
+            return this.api.post('follows', user.user_id, my_user_id)
+        } else {
+            return this.api.delete('follows', user.user_id)    
+        }
      });
    }
 

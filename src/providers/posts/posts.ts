@@ -21,14 +21,14 @@ export class Posts {
         if(post.topics.length > 0 && post.topics[0].topic == 'ml'){
 
           return new Post(post.post_id, post.content, post.user_id, post.title,
-             post.description, post.topics, "assets/img/ml.png")
+             post.description, post.topics, post.likedBy, "assets/img/ml.png")
         } else if(post.topics.length > 0 && post.topics[0].topic == 'distributed systems'){
 
           return new Post(post.post_id, post.content, post.user_id, post.title,
-             post.description, post.topics, "assets/img/ds.png")
+             post.description, post.topics, post.likedBy, "assets/img/ds.png")
         }
 
-        return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics)
+        return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
       })
     }).map((res) => {
       this.posts = res;
@@ -45,7 +45,7 @@ export class Posts {
       return res.flatMap(function (post) {
         console.log(post);
         return new Post(post.post_id, post.content, post.user_id, post.title,
-          post.description, post.topics)
+          post.description, post.topics, post.likedBy)
       })
     }).map((res) => {
       this.posts = res;
@@ -108,7 +108,11 @@ export class Posts {
         console.log(val);
         var user_id = val.user.user_id;
         console.log("Liking ", post)
-        return this.api.post('user-post-likes', user_id, post.post_id)
+        if (post.likedBy == true) {
+            return this.api.post('user-post-likes', user_id, post.post_id)
+        } else {
+            return this.api.delete('user-post-likes', user_id)        
+        }
     });
 
   }

@@ -32,7 +32,7 @@
 
     <ion-row no-padding>
       <ion-col text-left>
-        <button ion-button clear small color="danger" icon-start (click)="likePost(post)">
+        <button ion-button clear small [color]="post.likedBy ? 'danger' : 'dark'" icon-start (click)="likePost(post)">
           <ion-icon name='thumbs-up'></ion-icon>
           Like
         </button>

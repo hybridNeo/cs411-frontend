@@ -27,7 +27,7 @@
      </ion-card-content>
      <ion-row no-padding>
        <ion-col text-left>
-         <button ion-button clear small color="danger" icon-start (click)="followUser(user)">
+         <button ion-button clear small [color]="user.likedBy ? 'danger' : 'dark'" icon-start (click)="followUser(user)">
            <ion-icon name='heart'></ion-icon>
            Follow
          </button>
