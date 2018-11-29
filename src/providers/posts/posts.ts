@@ -37,6 +37,38 @@ export class Posts {
     }).catch(res => Observable.throw(res));
   }
 
+  search(params?: any) {
+
+    if (!params) {
+      return this.posts;
+    }
+    return this.api.get('search?query='+params.title).map((res: any) => {
+      console.log('here');
+
+      console.log(res);
+      return res.flatMap(function (post) {
+        console.log(post)
+        if(!post)
+          return None;
+        // if(!post.topics)
+        // if(post.topics.length > 0 && post.topics[0].topic == 'ml'){
+        //
+        //   return new Post(post.post_id, post.content, post.user_id, post.title,
+        //      post.description, post.topics, "assets/img/ml.png")
+        // } else if(post.topics.length > 0 && post.topics[0].topic == 'distributed systems'){
+        //
+        //   return new Post(post.post_id, post.content, post.user_id, post.title,
+        //      post.description, post.topics, "assets/img/ds.png")
+        // }
+
+        return new Post(post.post_id, post.content, post.user_id, post.title,
+          post.description, post.topics)
+      })
+    }).map((res) => {
+      this.posts = res;
+      return res
+    }).catch(res => Observable.throw(res));
+  }
   query(params?: any) {
     if (!params) {
       return this.posts;
