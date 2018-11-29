@@ -17,7 +17,8 @@ export class Posts {
   fetchAll() {
     return this.api.get('posts').map((res: any) => {
       return res.flatMap(function (post) {
-        return new Post(post.post_id, post.content, post.user_id, post.title, post.description)
+        console.log(post)
+        return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics)
       })
     }).map((res) => {
       this.posts = res;
@@ -52,7 +53,9 @@ export class Posts {
       if (res.success == true) {
         console.log("POST post success: Adding ", res);
         var p = res.post;
-        this.posts.push(new Post(p.post_id, p.content, p.user_id, p.title));
+        console.log(this.posts);
+        this.posts.unshift(new Post(p.post_id, p.content, p.user_id, p.title));
+        console.log(this.posts);
       }
     }, (err) => {
       console.error('ERROR', err);
