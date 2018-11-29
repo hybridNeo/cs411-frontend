@@ -38,8 +38,7 @@ export class SearchPage {
       title: val
     }).subscribe((result) => {
       this.currentPosts = result;
-    })
-    return;
+    });
   }
 
   /**
