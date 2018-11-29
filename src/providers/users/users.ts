@@ -68,14 +68,6 @@ export class Users {
      });
    }
 
-   unfollow(user: User) {
-    return this.storage.get('response').then((val) => {
-          console.log(val);
-          var my_user_id = val.user.user_id;
-          console.log("UnFollowing ", val.user)
-          return this.api.delete('follows', user.user_id)
-      });
-    }
 
    delete(user: User) {
      this.users.splice(this.users.indexOf(user), 1);

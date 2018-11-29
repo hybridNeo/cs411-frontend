@@ -3,6 +3,7 @@ import {IonicPage, ModalController, NavController} from 'ionic-angular';
 
 import {Post} from '../../models/post';
 import {Posts} from '../../providers';
+import {User} from '../../providers';
 
 @IonicPage()
 @Component({
@@ -60,6 +61,18 @@ export class ListPostPage {
     };
 
     /**
+    * Navigate to the detail page for the author of this post.
+    */
+   openAuthor(post: Post) {
+    console.log("openAuthor: ", post);
+    var user_author = this.posts.author(post)  
+    this.navCtrl.push('UserDetailPage', {
+       user: user_author
+     });
+
+    };
+
+    /**
     * Like a post
     */
    likePost(post: Post) {
@@ -68,12 +81,4 @@ export class ListPostPage {
      this.updatePosts()
      };
 
-     /**
-     * Unlike a post
-     */
-    unlikePost(post: Post) {
-      console.log("unlikePost: ", post);
-      this.posts.unlike(post)
-      this.updatePosts()
-      };
 }

@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Post} from '../../models/post';
+import {User} from '../../providers';
+
 import {Api} from '../api/api';
 import {Observable} from "rxjs";
 import {Storage} from '@ionic/storage';
@@ -73,6 +75,18 @@ export class Posts {
     return seq
   }
 
+  author(post: Post) {
+
+     return this.storage.get('response').then((val : any) => {
+        console.log(val);
+        console.log(val.user);
+        return val.user.getUser(post.user_id).subscribe((resp : any) => {
+            return resp
+         });
+      });
+
+    }
+
   like(post: Post) {
 
     return this.storage.get('response').then((val) => {
@@ -82,15 +96,6 @@ export class Posts {
         return this.api.post('user-post-likes', user_id, post.post_id)
     });
 
-  }
-
-  unlike(post: Post) {
-    return this.storage.get('response').then((val) => {
-         console.log(val);
-         var user_id = val.user.user_id;
-         console.log("UnLiking ", post)
-         return this.api.delete('user-post-likes', post.post_id)
-     });
   }
 
   delete(post: Post) {

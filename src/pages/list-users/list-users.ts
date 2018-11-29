@@ -60,21 +60,12 @@ export class ListUsersPage {
       this.updateUsers()
       };
 
-      /**
-      * Unfollow a user
-      */
-     unfollowUser(user: User) {
-       console.log("unfollowUser: ", user);
-       this.users.unfollow(user)
-       this.updateUsers()
-       };
 
-    /**getUsers() {
-    *   this.restProvider.getUsers()
-    *  .then(data => {
-    *    this.users = data;
-    *    console.log(this.users);
-    *  });
+      /*getUsers() {
+       *this.restProvider.getUsers().then(data => {
+        *this.users = data;
+        *console.log(this.users);
+      *});
     }*/
 
     /**constructor(public navCtrl: NavController, public restProvider: IonicProvider, public navParams: NavParams) {
