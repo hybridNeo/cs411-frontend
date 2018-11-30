@@ -16,7 +16,7 @@ export class ListPostPage {
 
   constructor(public navCtrl: NavController, public posts: Posts, public modalCtrl: ModalController) {
     this.currentPosts = [];
-    this.updatePosts()
+    this.updatePosts();
   }
 
   updatePosts() {
@@ -24,7 +24,6 @@ export class ListPostPage {
       this.currentPosts = posts
     })
   }
-
   /**
    * The view loaded, let's query our posts for the list
    */
@@ -78,8 +77,9 @@ export class ListPostPage {
    likePost(post: Post) {
       console.log("likePost: ", post);
       post.likedBy = !post.likedBy;
-      this.posts.like(post)
-      this.updatePosts()
+      console.log("likedBy: ", post.likedBy)
+      this.posts.like(post);
+      // this.updatePosts()
     };
 
 }
