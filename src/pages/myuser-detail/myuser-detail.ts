@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, ModalController, NavController} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 
 import {User} from '../../models/user';
 import {Users} from '../../providers';
@@ -10,48 +10,34 @@ import {Users} from '../../providers';
   templateUrl: 'myuser-detail.html',
 })
 export class MyUserDetailPage {
+  currentUsers: User[];
 
-  constructor(public navCtrl: NavController, public users: Users, public modalCtrl: ModalController) {
-     this.updateUsers()
+  constructor(public navCtrl: NavController, navParams: NavParams, public users: Users, public modalCtrl: ModalController) {
+    this.currentUsers = [];
+    this.updateUsers(navParams.get('user_id'))
   }
 
-  updateUsers() {
-     this.users.fetchAll()
+  updateUsers(user_id) {
+    this.users.fetchFollowing(user_id).subscribe((users) => {
+      this.currentUsers = users
+    })
   }
 
   /**
-    * The view loaded, let's query our users for the list
-    */
-   ionViewDidLoad() {
-   }
+   * The view loaded, let's query our users for the list
+   */
+  ionViewDidLoad() {
+  }
 
 
-   /**
-    * Navigate to the detail page for this user.
-    */
-   openBio(user: User) {
-     console.log("openUser: ", user);
-     this.navCtrl.push('UserDetailPage', {
-       user: user
-     });
-     };
-
-
-      /*getUsers() {
-       *this.restProvider.getUsers().then(data => {
-        *this.users = data;
-        *console.log(this.users);
-      *});
-    }*/
-
-    /**constructor(public navCtrl: NavController, public restProvider: IonicProvider, public navParams: NavParams) {
-    *
-    *this.getUsers();
-    *
-    }*/
-
-    /**ionViewDidLoad() {
-    *console.log('ionViewDidLoad ListUsersPage');
-    }*/
+  /**
+   * Navigate to the detail page for this user.
+   */
+  openBio(user: User) {
+    console.log("openUser: ", user);
+    this.navCtrl.push('UserDetailPage', {
+      user: user
+    });
+  };
 
 }

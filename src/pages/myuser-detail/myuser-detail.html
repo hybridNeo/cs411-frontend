@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>MyUsers</ion-title>
+    <ion-title>Followings</ion-title>
   
     <ion-buttons end>
        <button ion-button icon-only (click)="createUser()">
@@ -15,7 +15,7 @@
 
 <ion-content>
 
-    <ion-card *ngFor="let user of users.users">
+    <ion-card *ngFor="let user of currentUsers">
      <img [src]="user.profilePicture"/>
      <ion-card-content>
        <ion-card-title>

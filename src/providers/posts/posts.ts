@@ -22,13 +22,15 @@ export class Posts {
       }
       console.log(val);
       console.log(val.user.user_id);
-      this.fetchAllForUser(user_id)
+      this.fetchAllForUser(user_id).subscribe((res: Post[]) => {
+        this.posts = res.reverse();
+      })
     });
   }
 
   rec(userid) {
     return this.api.get('recommend/' + userid).map((res: any) => {
-      return res.map( (post) => {
+      return res.map((post) => {
         // console.log(post)
         return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
       })
@@ -48,22 +50,17 @@ export class Posts {
         return new Post(post.post_id, post.content, post.user_id, post.title,
           post.description, post.topics, post.likedBy, profilePic)
       })
-    }).subscribe((res: Post[]) => {
-      this.posts = res.reverse();
     })
   }
 
   fetchAllLikedByUser(user_id: Number) {
-  return this.api.get('user-post-likes/' + user_id).map((res: any) => {
-         return res.flatMap(function (post) {
-           // console.log(post)
-           return new Post(post.post_id, post.content, post.user_id, post.title, post.description,   post.topics, post.likedBy)
-         })
-       }).map((res) => {
-         this.posts = res.reverse();
-         return res
-       }).catch(res => Observable.throw(res));
-    }
+    return this.api.get('user-post-likes/' + user_id).map((res: any) => {
+      return res.map((post) => {
+        // console.log(post)
+        return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
+      })
+    }).catch(res => Observable.throw(res));
+  }
 
   search(params?: any) {
     return this.api.get('search?query=' + params.title).map((res: any) => {
@@ -122,6 +119,14 @@ export class Posts {
       });
     });
 
+  }
+
+  fetchAuthoredPosts(user_id) {
+    return this.fetchAllForUser(user_id).map((posts) => {
+      return posts.filter((post) => {
+        return post.user_id == user_id
+      })
+    })
   }
 
   like(post: Post) {

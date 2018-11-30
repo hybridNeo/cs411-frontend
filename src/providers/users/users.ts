@@ -3,6 +3,7 @@ import {User} from '../../models/user';
 import {Api} from '../api/api';
 import {Observable} from "rxjs";
 import {Storage} from '@ionic/storage';
+import {filter} from 'rxjs/operators';
 
 @Injectable()
 export class Users {
@@ -35,6 +36,14 @@ export class Users {
       console.log(val);
       console.log(val.user.user_id);
       this.fetchAllForUser(user_id).subscribe()
+    })
+  }
+
+  fetchFollowing(user_id) {
+    return this.api.get('follows/' + user_id).map((users: any) => {
+      return users.map((user: User) => {
+        return new User(user.user_id, user.username)
+      })
     })
   }
 

@@ -13,15 +13,19 @@ import {User} from '../../providers';
 })
 
 export class MyPostDetailPage {
-    post: Post;
+  post: Post;
+  currentPosts: Post[];
 
-  constructor(public navCtrl: NavController, navParams: NavParams, public posts: Posts, public modalCtrl: ModalController, ) {
+  constructor(public navCtrl: NavController, navParams: NavParams, public posts: Posts, public modalCtrl: ModalController,) {
     this.updatePosts(navParams.get('user_id'));
   }
 
   updatePosts(user_id: Number) {
-    return this.posts.fetchAllForUser(user_id)
+    this.posts.fetchAuthoredPosts(user_id).subscribe((posts: Post[]) => {
+      this.currentPosts = posts
+    })
   }
+
   /**
    * The view loaded, let's query our posts for the list
    */
@@ -37,29 +41,29 @@ export class MyPostDetailPage {
     this.navCtrl.push('PostDetailPage', {
       post: post
     });
-    };
+  };
 
-    /**
-    * Navigate to the detail page for the author of this post.
-    */
-   openAuthor(post: Post) {
+  /**
+   * Navigate to the detail page for the author of this post.
+   */
+  openAuthor(post: Post) {
     console.log("openAuthor: ", post);
-    var user_author = this.posts.author(post)  
+    var user_author = this.posts.author(post)
     this.navCtrl.push('UserDetailPage', {
-       user: user_author
-     });
+      user: user_author
+    });
 
-    };
+  };
 
-    /**
-    * Like a post
-    */
-   likePost(post: Post) {
-      console.log("likePost: ", post);
-      post.likedBy = !post.likedBy;
-      console.log("likedBy: ", post.likedBy)
-      this.posts.like(post);
-      // this.updatePosts()
-    };
+  /**
+   * Like a post
+   */
+  likePost(post: Post) {
+    console.log("likePost: ", post);
+    post.likedBy = !post.likedBy;
+    console.log("likedBy: ", post.likedBy)
+    this.posts.like(post);
+    // this.updatePosts()
+  };
 
 }
