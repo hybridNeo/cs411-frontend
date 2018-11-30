@@ -89,7 +89,7 @@ export class Posts {
         console.log("POST post success: Adding ", res);
         var p = res.post;
         console.log(this.posts);
-        this.posts.unshift(new Post(p.post_id, p.content, p.user_id, p.title));
+        this.posts.splice(0, 0, new Post(p.post_id, p.content, p.user_id, p.title));
         console.log(this.posts);
       }
     }, (err) => {
@@ -121,10 +121,7 @@ export class Posts {
         };
         return this.api.post('user-post-likes/' + user_id, body).subscribe()
       } else {
-        var body = {
-           post_id: post.post_id
-         };
-        return this.api.delete('user-post-likes/' + user_id, body).subscribe()
+        return this.api.delete('user-post-likes/' + user_id + '?post_id=' + body).subscribe()
       }
     })
 

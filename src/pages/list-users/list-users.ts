@@ -10,17 +10,13 @@ import {Users} from '../../providers';
   templateUrl: 'list-users.html',
 })
 export class ListUsersPage {
-  public currentUsers: User[];
 
   constructor(public navCtrl: NavController, public users: Users, public modalCtrl: ModalController) {
-     this.currentUsers = [];
      this.updateUsers()
   }
 
   updateUsers() {
-     this.users.fetchAll().subscribe((users) => {
-       this.currentUsers = users
-     })
+     this.users.fetchAll()
   }
 
   /**
@@ -56,8 +52,9 @@ export class ListUsersPage {
      */
     followUser(user: User) {
       console.log("followUser: ", user);
-      user.likedBy = !user.likedBy;
       this.users.follow(user)
+
+       user.follows = !user.follows
     };
 
 
