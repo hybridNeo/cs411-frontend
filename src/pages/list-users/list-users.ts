@@ -58,8 +58,7 @@ export class ListUsersPage {
       console.log("followUser: ", user);
       user.likedBy = !user.likedBy;
       this.users.follow(user)
-      this.updateUsers()
-      };
+    };
 
 
       /*getUsers() {
