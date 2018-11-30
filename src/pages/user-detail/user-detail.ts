@@ -13,8 +13,8 @@ import {Component} from '@angular/core';
    user: User;
 
    constructor(public navCtrl: NavController, navParams: NavParams, users: Users) {
-     console.log(navParams.get('user'))
-     this.user = navParams.get('user')
+     console.log(navParams.get('user'));
+     this.user = navParams.get('user');
    }
 
  }

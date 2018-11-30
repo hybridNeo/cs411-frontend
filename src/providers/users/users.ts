@@ -27,6 +27,12 @@ export class Users {
     }).catch(res => Observable.throw(res))
   }
 
+  find(user_id) {
+    return this.api.get('/users/' + user_id).map((res: any) => {
+      return new User(res.user_id, res.username, res.bio)
+    })
+  }
+
   fetchAll() {
     this.storage.get('response').then((val: any) => {
       let user_id = -1;
@@ -42,7 +48,7 @@ export class Users {
   fetchFollowing(user_id) {
     return this.api.get('follows/' + user_id).map((users: any) => {
       return users.map((user: User) => {
-        return new User(user.user_id, user.username)
+        return new User(user.user_id, user.username, user.bio)
       })
     })
   }
@@ -74,7 +80,7 @@ export class Users {
       if (res.success == true) {
         console.log("POST user success: Adding ", res);
         var u = res.user;
-        this.users.push(new User(u.user_id, u.username, u.likedBy));
+        this.users.push(new User(u.user_id, u.username, u.bio, u.likedBy));
       }
     }, (err) => {
       console.error('ERROR', err);
