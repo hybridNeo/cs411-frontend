@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
-import { Tab1Root, Tab2Root, Tab3Root, Tab4Root, Tab5Root } from '../';
+import { Tab1Root, Tab2Root, Tab3Root, Tab4Root, Tab5Root, Tab6Root } from '../';
 
 @IonicPage()
 @Component({
@@ -15,12 +15,14 @@ export class TabsPage {
   tab3Root: any = Tab3Root;
   tab4Root: any = Tab4Root;
   tab5Root: any = Tab5Root;
+  tab6Root: any = Tab6Root;
 
   tab1Title = " ";
   tab2Title = " ";
   tab3Title = " ";
   tab4Title = " ";
   tab5Title = " ";
+  tab6Title = " ";
 
   constructor(public navCtrl: NavController, public translateService: TranslateService) {
     translateService.get(['TAB1_TITLE', 'TAB2_TITLE', 'TAB3_TITLE', 'TAB4_TITLE', 'TAB5_TITLE']).subscribe(values => {
@@ -29,6 +31,7 @@ export class TabsPage {
       this.tab3Title = values['TAB3_TITLE'];
       this.tab4Title = values['TAB4_TITLE'];
       this.tab5Title = values['TAB5_TITLE'];
+      this.tab6Title = "Recommended";
     });
   }
 }

@@ -26,6 +26,20 @@ export class Posts {
     });
   }
 
+  rec(userid) {
+    return this.api.get('recommend/'+userid).map((res: any) => {
+      return res.flatMap(function (post) {
+        // console.log(post)
+
+        
+        return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
+      })
+    }).map((res) => {
+      this.posts = res;
+      return res
+    }).catch(res => Observable.throw(res));
+}
+
   fetchAllForUser(user_id: Number) {
       return this.api.get('posts', {user_id: user_id}).map((res: any) => {
         return res.flatMap(function (post) {

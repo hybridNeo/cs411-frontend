@@ -11,3 +11,4 @@ export const Tab2Root = 'SearchPage';
 export const Tab3Root = 'SettingsPage';
 export const Tab4Root = 'ListUsersPage';
 export const Tab5Root = 'ListTopicPage';
+export const Tab6Root = 'RecPage';
