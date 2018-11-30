@@ -121,7 +121,7 @@ export class Posts {
         };
         return this.api.post('user-post-likes/' + user_id, body).subscribe()
       } else {
-        return this.api.delete('user-post-likes/' + user_id + '?post_id=' + body).subscribe()
+        return this.api.delete('user-post-likes/' + user_id + '?post_id=' + post.post_id).subscribe()
       }
     })
 
