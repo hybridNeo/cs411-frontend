@@ -39,7 +39,7 @@ export class Posts {
           return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
         })
       }).map((res) => {
-        this.posts = res;
+        this.posts = res.reverse();
         return res
       }).catch(res => Observable.throw(res));
   }
