@@ -24,6 +24,9 @@
         <ion-col>
           <ion-icon name="arrow-forward" float-right></ion-icon>
         </ion-col>
+        <ion-item *ngFor="let post of topic.posts">
+            <span><button ion-button clear small color="danger" > {{post.title}} </button></span>
+        </ion-item>
       </ion-row>
     </ion-grid>
   </ion-item>

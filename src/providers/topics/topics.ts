@@ -2,25 +2,42 @@ import {Injectable} from '@angular/core';
 import {Topic} from '../../models/topic';
 import {Api} from '../api/api';
 import {Observable} from "rxjs";
+import {Storage} from '@ionic/storage';
 
  @Injectable()
  export class Topics {
    public topics: Topic[];
 
-   constructor(public api: Api) {
+   constructor(public api: Api, private storage: Storage) {
      this.topics = [];
    }
 
    fetchAll() {
      return this.api.get('topics').map((res: any) => {
-       return res.flatMap(function (topic) {
-         return new Topic(topic.topic_id, topic.topic, topic.description)
+        return res.flatMap(function (topic) {
+         return new Topic(topic.topic_id, topic.topic, topic.description, topic.posts)
        })
      }).map((res) => {
        this.topics = res;
        return res
      }).catch(res => Observable.throw(res));
    }
+
+   search(params?: any) {
+     if (!params) {
+       return this.topics;
+     }
+
+     return this.api.get('search?query=' + params.topic).map((res: any) => {
+       return res.flatMap(function (topic) {
+         console.log(topic);
+         return new Topic(topic.topic_id, topic.topic, topic.description, topic.posts)
+       })
+     }).map((res) => {
+       this.topics = res;
+       return res
+     }).catch(res => Observable.throw(res));
+    }
 
    query(params?: any) {
      if (!params) {
@@ -60,14 +77,21 @@ import {Observable} from "rxjs";
 
    like(topic: Topic) {
      // TODO: add POST method for Topic (increment)
-     console.log("Liking ", topic)
-     return this.api.post('topics', topic.topic_id)
-   }
+     //console.log("Liking ", topic)
+     //return this.api.post('topics', topic.topic_id)
+     
+    return this.storage.get('response').then((val) => {
+       console.log(val);
+       //var user_id = val.user.user_id;
+       console.log("Liking ", topic)
+     }) 
+     
+    }
 
    unlike(topic: Topic) {
      // TODO: add POST method for Topic (decrement)
-     console.log("UnLiking ", topic)
-     return this.api.post('topics', topic.topic_id)
+     //console.log("UnLiking ", topic)
+     //return this.api.post('topics', topic.topic_id)
     }
 
    delete(topic: Topic) {
