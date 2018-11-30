@@ -65,8 +65,8 @@ export class ListTopicPage {
    likeTopic(topic: Topic) {
      console.log("likeTopic: ", topic);
      this.topics.like(topic)
-     this.updateTopics()
-     };
+     //this.updateTopics()
+    };
 
      /**
      * Unlike a topic

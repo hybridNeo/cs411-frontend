@@ -79,7 +79,6 @@ export class ListPostPage {
       console.log("likePost: ", post);
       post.likedBy = !post.likedBy;
       this.posts.like(post)
-      this.updatePosts()
     };
 
 }
