@@ -49,6 +49,12 @@
           Read
         </button>
       </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start (click)="deletePost(post)">
+          <ion-icon name='trash'></ion-icon>
+            Delete
+        </button>
+      </ion-col>
     </ion-row>
   </ion-card>
   <!--<button ion-item (click)="openPost(post)">-->

@@ -131,6 +131,10 @@ export class Posts {
   }
 
   delete(post: Post) {
-    this.posts.splice(this.posts.indexOf(post), 1);
+    this.api.delete('post/' + post.post_id).map((res: any) => {
+      if (res.success) {
+        this.posts.splice(this.posts.indexOf(post), 1);
+      }
+    }).subscribe()
   }
 }
