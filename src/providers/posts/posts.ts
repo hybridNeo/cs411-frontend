@@ -58,6 +58,18 @@ export class Posts {
       }).catch(res => Observable.throw(res));
   }
 
+  fetchAllLikedByUser(user_id: Number) {
+  return this.api.get('user-post-likes/' + user_id).map((res: any) => {
+         return res.flatMap(function (post) {
+           // console.log(post)
+           return new Post(post.post_id, post.content, post.user_id, post.title, post.description,   post.topics, post.likedBy)
+         })
+       }).map((res) => {
+         this.posts = res.reverse();
+         return res
+       }).catch(res => Observable.throw(res));
+    }
+
   search(params?: any) {
     if (!params) {
       return this.posts;
