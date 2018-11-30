@@ -15,24 +15,30 @@ export class Posts {
   }
 
   fetchAll() {
-    return this.api.get('posts').map((res: any) => {
-      return res.flatMap(function (post) {
-        // console.log(post)
-        if (post.topics.length > 0 && post.topics[0].topic == 'ml') {
-
-          return new Post(post.post_id, post.content, post.user_id, post.title,
-            post.description, post.topics, post.likedBy, "assets/img/ml.png")
-        } else if (post.topics.length > 0 && post.topics[0].topic == 'distributed systems') {
-
-          return new Post(post.post_id, post.content, post.user_id, post.title,
-            post.description, post.topics, post.likedBy, "assets/img/ds.png")
-        }
-        return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
+    var body = {};
+    this.storage.get('response').then((val: any) => {
+       console.log(val);
+       console.log(val.user.user_id);
+       body = {
+        user_id: val.user.user_id
+        };
+    });
+    return this.api.get('posts', body).map((res: any) => {
+            return res.flatMap(function (post) {
+            // console.log(post)
+            if (post.topics.length > 0 && post.topics[0].topic == 'ml') {
+                return new Post(post.post_id, post.content, post.user_id, post.title,
+                post.description, post.topics, post.likedBy, "assets/img/ml.png")
+            } else if (post.topics.length > 0 && post.topics[0].topic == 'distributed systems') {
+                return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy, "assets/img/ds.png")
+            }
+            return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
       })
     }).map((res) => {
       this.posts = res;
       return res
-    }).catch(res => Observable.throw(res));
+      }).catch(res => Observable.throw(res));
+    
   }
 
   search(params?: any) {
