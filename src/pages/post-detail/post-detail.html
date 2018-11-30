@@ -12,7 +12,7 @@
   </div>
 
   <div class="page-detail" padding>
-    <h2>{{post.title}}</h2>
-    <p>{{post.content}}</p>
+    <h1 text-center="">{{post.title}}</h1>
+    <p [innerHTML]="post.htmlText()"></p>
   </div>
 </ion-content>
