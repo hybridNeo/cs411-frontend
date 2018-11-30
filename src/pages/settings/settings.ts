@@ -112,5 +112,41 @@ export class SettingsPage {
 
   ngOnChanges() {
     console.log('Ng All Changes');
-  }
+    }
+
+    openMyPosts() {
+        this.storage.get('response').then((val  : any) => {
+            console.log(val);
+            var my_user_id = val.user.user_id; 
+            console.log(this.user);
+            console.log("openMyPosts: ");
+            this.navCtrl.push('MyPostDetailPage', {
+                user_id: my_user_id
+            });
+        });
+    };
+
+    openMyUsers() {
+         this.storage.get('response').then((val  : any) => {
+             console.log(val);
+             var my_user_id = val.user.user_id;
+             console.log(this.user);
+             console.log("openMyUsers: ");
+             this.navCtrl.push('MyUserDetailPage', {
+                 user_id: my_user_id
+             });
+         });
+    };
+
+    openLikedPosts() {
+         this.storage.get('response').then((val  : any) => {
+             console.log(val);
+             var my_user_id = val.user.user_id;
+             console.log(this.user);
+             console.log("openLikedPosts: ");
+             this.navCtrl.push('LikedPostDetailPage', {
+                 user_id: my_user_id
+             });
+         });
+     };
 }
