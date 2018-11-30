@@ -18,8 +18,8 @@ export class Users {
       user_id: user_id
     }
     return this.api.get('users', body).map((res: any) => {
-      return res.flatMap(function (user: any) {
-        return new User(user.user_id, user.username, user.follows)
+      return res.map(function (user: any) {
+        return new User(user.user_id, user.username, user.bio, user.follows)
       })
     }).map((res) => {
       this.users = res;
