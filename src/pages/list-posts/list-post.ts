@@ -12,17 +12,13 @@ import {User} from '../../providers';
 })
 
 export class ListPostPage {
-  public currentPosts: Post[];
 
-  constructor(public navCtrl: NavController, public posts: Posts, public modalCtrl: ModalController) {
-    this.currentPosts = [];
+  constructor(public navCtrl: NavController, public posts: Posts, public modalCtrl: ModalController, ) {
     this.updatePosts();
   }
 
   updatePosts() {
-    this.posts.fetchAll().subscribe((posts) => {
-      this.currentPosts = posts
-    })
+    this.posts.fetchAll()
   }
   /**
    * The view loaded, let's query our posts for the list
