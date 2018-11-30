@@ -1,0 +1,48 @@
+<ion-header>
+
+   <ion-navbar>
+     <ion-title>MyPosts</ion-title>
+    </ion-navbar>
+
+ </ion-header>
+
+ <ion-content>
+
+   <ion-card *ngFor="let post of posts.posts">
+     <img [src]="post.profilePicture"/>
+     <ion-card-content>
+       <ion-card-title>
+         {{post.title}}
+       </ion-card-title>
+       <p>
+         {{post.description}}
+       </p>
+     </ion-card-content>
+     <ion-item *ngFor="let topic of post.topics">
+
+       <span><button ion-button clear small color="danger" > {{ topic.topic }} </button></span>
+     </ion-item>
+
+
+     <ion-row no-padding>
+       <ion-col text-left>
+         <button ion-button clear small [color]="post.likedBy ? 'danger' : 'dark'" icon-start (click)="likePost(post)">
+           <ion-icon name='thumbs-up'></ion-icon>
+           Like
+         </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button clear small color="danger" icon-start (click)="openAuthor(post)">
+            <ion-icon name='person'></ion-icon>
+            Author
+          </button>
+        </ion-col>
+       <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start (click)="openPost(post)">
+           <ion-icon name='book'></ion-icon>
+           Read
+         </button>
+       </ion-col>
+     </ion-row>
+   </ion-card>
+   </ion-content>
