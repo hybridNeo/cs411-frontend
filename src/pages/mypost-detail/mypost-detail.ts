@@ -20,7 +20,7 @@ export class MyPostDetailPage {
   }
 
   updatePosts(user_id: Number) {
-    return this.posts.fetchAllForUser(user_id).subscribe()
+    return this.posts.fetchAllForUser(user_id)
   }
   /**
    * The view loaded, let's query our posts for the list

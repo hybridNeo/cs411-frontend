@@ -22,54 +22,50 @@ export class Posts {
       }
       console.log(val);
       console.log(val.user.user_id);
-      this.fetchAllForUser(user_id).subscribe()
+      this.fetchAllForUser(user_id)
     });
   }
 
   rec(userid) {
-    return this.api.get('recommend/'+userid).map((res: any) => {
+    return this.api.get('recommend/' + userid).map((res: any) => {
       return res.flatMap(function (post) {
         // console.log(post)
 
-        
+
         return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
       })
     }).map((res) => {
       this.posts = res;
       return res
     }).catch(res => Observable.throw(res));
-}
+  }
 
   fetchAllForUser(user_id: Number) {
-      return this.api.get('posts', {user_id: user_id}).map((res: any) => {
-        return res.flatMap(function (post) {
-          // console.log(post)
-          if (post.topics.length > 0 && post.topics[0].topic == 'ml') {
-            return new Post(post.post_id, post.content, post.user_id, post.title,
-              post.description, post.topics, post.likedBy, "assets/img/ml.png")
-          } else if (post.topics.length > 0 && post.topics[0].topic == 'distributed systems') {
-            return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy, "assets/img/ds.png")
-          }
-          return new Post(post.post_id, post.content, post.user_id, post.title, post.description, post.topics, post.likedBy)
-        })
-      }).map((res) => {
-        this.posts = res.reverse();
-        return res
-      }).catch(res => Observable.throw(res));
+    return this.api.get('posts', {user_id: user_id}).map((posts: any) => {
+      return posts.map((post: any) => {
+        let profilePic = "assets/img/basic.png";
+
+        if (post.topics.length > 0 && post.topics[0].topic == 'ml') {
+          profilePic = "assets/img/ml.png"
+        } else if (post.topics.length > 0 && post.topics[0].topic == 'distributed systems') {
+          profilePic = "assets/img/ds.png";
+        }
+        return new Post(post.post_id, post.content, post.user_id, post.title,
+          post.description, post.topics, post.likedBy, profilePic)
+      })
+    }).subscribe((res: Post[]) => {
+      this.posts = res.reverse();
+    })
   }
 
   search(params?: any) {
-    if (!params) {
-      return this.posts;
-    }
-
     return this.api.get('search?query=' + params.title).map((res: any) => {
-      return res.flatMap(function (post) {
+      return res.map((post) => {
         console.log(post);
         return new Post(post.post_id, post.content, post.user_id, post.title,
           post.description, post.topics, post.likedBy)
       })
-    }).catch(res => Observable.throw(res));
+    })
   }
 
   query(params?: any) {
