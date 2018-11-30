@@ -117,11 +117,10 @@ export class SettingsPage {
     openMyPosts() {
         this.storage.get('response').then((val  : any) => {
             console.log(val);
-            var my_user_id = val.user.user_id; 
-            console.log(this.user);
+            var user_id = val.user.user_id; 
             console.log("openMyPosts: ");
             this.navCtrl.push('MyPostDetailPage', {
-                user_id: my_user_id
+                user_id: user_id
             });
         });
     };
@@ -129,11 +128,11 @@ export class SettingsPage {
     openMyUsers() {
          this.storage.get('response').then((val  : any) => {
              console.log(val);
-             var my_user_id = val.user.user_id;
+             var user_id = val.user.user_id;
              console.log(this.user);
              console.log("openMyUsers: ");
              this.navCtrl.push('MyUserDetailPage', {
-                 user_id: my_user_id
+                 user_id: user_id
              });
          });
     };
@@ -141,11 +140,11 @@ export class SettingsPage {
     openLikedPosts() {
          this.storage.get('response').then((val  : any) => {
              console.log(val);
-             var my_user_id = val.user.user_id;
+             var user_id = val.user.user_id;
              console.log(this.user);
              console.log("openLikedPosts: ");
              this.navCtrl.push('LikedPostDetailPage', {
-                 user_id: my_user_id
+                 user_id: user_id
              });
          });
      };

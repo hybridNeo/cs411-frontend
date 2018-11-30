@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, ModalController, NavController} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 
 import {Post} from '../../models/post';
+import {Users} from '../../providers';
 import {Posts} from '../../providers';
 import {User} from '../../providers';
 
@@ -12,13 +13,14 @@ import {User} from '../../providers';
 })
 
 export class MyPostDetailPage {
+    post: Post;
 
-  constructor(public navCtrl: NavController, public posts: Posts, public modalCtrl: ModalController, ) {
-    this.updatePosts();
+  constructor(public navCtrl: NavController, navParams: NavParams, public posts: Posts, public modalCtrl: ModalController, ) {
+    this.updatePosts(navParams.get('user_id'));
   }
 
-  updatePosts() {
-    this.posts.fetchAll()
+  updatePosts(user_id: Number) {
+    return this.posts.fetchAllForUser(user_id).subscribe()
   }
   /**
    * The view loaded, let's query our posts for the list
