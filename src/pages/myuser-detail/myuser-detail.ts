@@ -10,17 +10,13 @@ import {Users} from '../../providers';
   templateUrl: 'myuser-detail.html',
 })
 export class MyUserDetailPage {
-  public currentUsers: User[];
 
   constructor(public navCtrl: NavController, public users: Users, public modalCtrl: ModalController) {
-     this.currentUsers = [];
      this.updateUsers()
   }
 
   updateUsers() {
-     this.users.fetchAll().subscribe((users) => {
-       this.currentUsers = users
-     })
+     this.users.fetchAll()
   }
 
   /**
