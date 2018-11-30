@@ -89,7 +89,7 @@ export class TopicCreatePage {
       console.log(val);
       let info = {
         user_id: val.user.user_id,
-        topic: this.form.value.title,
+        topic: this.form.value.topic,
         description: this.form.value.description,
       };
 
